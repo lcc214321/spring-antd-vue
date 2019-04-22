@@ -141,7 +141,7 @@ CREATE TABLE `sso_permission_data_rule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `sys_dict` (
+CREATE TABLE `sso_dict` (
   `id` varchar(32) NOT NULL,
   `dict_name` varchar(100) default NULL COMMENT '字典名称',
   `dict_code` varchar(100) default NULL COMMENT '字典编码',
@@ -175,6 +175,18 @@ CREATE TABLE `sso_dict_item` (
   KEY `index_table_dict_status` USING BTREE (`is_enabled`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE `sso_user_token` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` varchar(32) NOT NULL COMMENT '用户ID',
+  `terminal` tinyint(4) NOT NULL DEFAULT '1' COMMENT '终端类型: 1 PC 2 H5',
+  `token` varchar(100) NOT NULL COMMENT 'token',
+  `expire_time` datetime DEFAULT NULL COMMENT '过期时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `utoken` (`token`),
+  UNIQUE KEY `token` (`token`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='SSO用户Token';
 
 
 

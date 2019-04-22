@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eaton.modules.sso.dao.SsoUserDao">
+	<!-- 查询用户的所有权限 -->
+	<select id="queryAllPerms" resultType="string">
+		select m.perms from sso_user_role ur
+			LEFT JOIN sso_role_permission rm on ur.role_id = rm.role_id
+			LEFT JOIN sso_permission m on rm.menu_id = m.menu_id
+		where ur.user_id = #{userId}
+	</select>
+	
+	<!-- 查询用户的所有菜单ID --> 
+	<select id="queryAllMenuId" resultType="string">
+		select distinct rm.menu_id from sso_user_role ur
+			LEFT JOIN sso_role_permission rm on ur.role_id = rm.role_id
+		where ur.user_id = #{userId}
+	</select>
+
+
+	<select id="queryByMobile" resultType="com.eaton.modules.sso.entity.SsoUserEntity">
+		select * from sso_user where mobile = #{mobile}
+	</select>
+
+	<select id="queryList" resultType="com.eaton.modules.sso.entity.SsoUserEntity">
+		select id, username from sso_user
+	</select>
+</mapper>

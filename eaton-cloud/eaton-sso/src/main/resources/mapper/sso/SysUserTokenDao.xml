@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eaton.modules.sso.dao.SsoUserTokenDao">
+
+	<select id="queryByToken" resultType="com.eaton.modules.sso.entity.SsoUserTokenEntity">
+		select * from sys_user_token where token = #{value}
+	</select>
+
+	<select id="getTerminalToken" resultType="com.eaton.modules.sso.entity.SsoUserTokenEntity">
+		select * from sys_user_token where user_id = #{userId} and terminal = #{terminal}
+	</select>
+</mapper>
